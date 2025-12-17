@@ -9,22 +9,17 @@
     <div class="mx-auto max-w-xl">
         <form action="{{ route('pegawai.store') }}" method="POST" class="space-y-4">
             @csrf
-
-            {{-- Nama --}}
             <div>
                 <label class="block text-sm font-medium mb-1">Nama</label>
                 <input type="text" name="nama" value="{{ old('nama') }}"
                        class="w-full rounded-md border px-3 py-2 text-sm" required>
             </div>
 
-            {{-- Email --}}
             <div>
                 <label class="block text-sm font-medium mb-1">Email</label>
                 <input type="email" name="email" value="{{ old('email') }}"
                        class="w-full rounded-md border px-3 py-2 text-sm" required>
             </div>
-
-            {{-- Gender --}}
             <div>
                 <label class="block text-sm font-medium mb-1">Gender</label>
                 <select name="gender" class="w-full rounded-md border px-3 py-2 text-sm" required>
@@ -34,7 +29,6 @@
                 </select>
             </div>
 
-            {{-- Pekerjaan --}}
             <div>
                 <label class="block text-sm font-medium mb-1">Pekerjaan</label>
                 <select name="pekerjaan_id" class="w-full rounded-md border px-3 py-2 text-sm" required>
@@ -45,7 +39,6 @@
                 </select>
             </div>
 
-            {{-- Status --}}
             <div>
                 <label class="block text-sm font-medium mb-1">Status</label>
                 <select name="is_active" class="w-full rounded-md border px-3 py-2 text-sm" required>
@@ -54,7 +47,27 @@
                 </select>
             </div>
 
-            {{-- Action --}}
+            <div class="mb-4">
+                <label class="block font-medium mb-2">Captcha</label>
+
+                <div class="mb-2">
+                    {!! captcha_img() !!}
+                </div>
+
+                <input
+                    type="text"
+                    name="captcha"
+                    class="border rounded w-full p-2"
+                    placeholder="Masukkan captcha"
+                    required
+                >
+
+                @error('captcha')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+
             <div class="flex gap-2 pt-4">
                 <button type="submit"
                         class="rounded-md bg-green-600 px-4 py-2 text-sm text-white hover:bg-green-700">
