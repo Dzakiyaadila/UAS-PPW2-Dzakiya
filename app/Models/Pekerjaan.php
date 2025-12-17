@@ -10,6 +10,6 @@ class Pekerjaan extends Model
 
     public function pegawai()
     {
-        return $this->hasMany(Pegawai::class);
+        return $this->hasMany(Pegawai::class, 'pekerjaan_id');
     }
 }
