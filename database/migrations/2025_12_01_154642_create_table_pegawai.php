@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pegawai', function (Blueprint $table) {
+        Schema::create('dzakiya_542103_pegawai', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pekerjaan_id')->constrained('pekerjaan')->cascadeOnDelete();
+            $table->foreignId('pekerjaan_id')->constrained('dzakiya_542103_pekerjaan')->cascadeOnDelete();
             $table->string('nama');
             $table->string('email')->unique();
             $table->enum('gender', ['male','female']);
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pegawai');
+        Schema::dropIfExists('dzakiya_542103_pegawai');
     }
 };

@@ -13,8 +13,8 @@ class PekerjaanController extends Controller
         $keyword = $request->get('keyword');
         $data = Pekerjaan::when($keyword, function ($query) use ($keyword) {
             $query->where('nama', 'like', "%{$keyword}%")->orWhere('deskripsi', 'like', "%{$keyword}%");
-        })->get();
-        return view('pekerjaan.index', compact('data'));
+        })->paginate(10);
+        return view('pekerjaan.index', compact('data', 'keyword'));
     }
 
     public function add() {
@@ -36,7 +36,7 @@ class PekerjaanController extends Controller
         if ($data->save()) {
             return redirect()->route('pekerjaan.index')->with('success', 'Data berhasil ditambahkan');
         } else {
-            return redirect()->route('pekerjaan.index')->with('success', 'Data tidak tersimpan');
+            return redirect()->route('pekerjaan.index')->with('error', 'Data tidak tersimpan');
         }
     }
 
@@ -61,12 +61,14 @@ class PekerjaanController extends Controller
         if ($data->save()) {
             return redirect()->route('pekerjaan.index')->with('success', 'Data tersimpan');
         } else {
-            return redirect()->route('pekerjaan.index')->with('success', 'Data tidak tersimpan');
+            return redirect()->route('pekerjaan.index')->with('error', 'Data tidak tersimpan');
         }
     }
 
     public function destroy(Request $request) {
         Pekerjaan::findOrFail($request->id)->delete();
-        return redirect()->route('pekerjaan.index')->with('success', 'Data terhapus');
+        return redirect()
+            ->route('pekerjaan.index')
+            ->with('success', 'Data terhapus');
     }
 }

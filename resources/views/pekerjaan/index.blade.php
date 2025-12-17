@@ -20,6 +20,7 @@
                 <table class="min-w-full divide-y divide-x divide-gray-200 text-sm">
                     <thead class="bg-gray-100">
                     <tr>
+                        {{-- <td>{{ $data->firstItem() + $k }}</td> --}}
                         <th class="px-4 py-3 text-left font-semibold text-gray-700" width="1">No</th>
                         <th class="px-4 py-3 text-left font-semibold text-gray-700">Nama Pekerjaan</th>
                         <th class="px-4 py-3 text-left font-semibold text-gray-700">Deskripsi</th>
@@ -30,7 +31,7 @@
                     <tbody class="divide-y divide-gray-100 bg-white">
                         @forelse($data as $k => $d)
                         <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-3">{{ $k+1 }}</td>
+                            <td class="px-4 py-3">{{ $data->firstItem() + $k }}</td>
                             <td class="px-4 py-3 font-medium text-gray-900">{{ $d->nama }}</td>
                             <td class="px-4 py-3 text-gray-600">{{ $d->deskripsi }}</td>
                             <td class="px-4 py-3 text-gray-600">{{ 100 }}</td>
@@ -54,6 +55,10 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div class="mt-4">
+                    {{ $data->withQueryString()->links() }}
+                </div>
+
             </div>
 
         </div>

@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pegawai extends Model
 {
-    protected $table = 'pegawai';
+    protected $table = 'dzakiya_542103_pegawai';
 
-    public function pegawai()
+    public function pekerjaan()
     {
-        return $this->hasOne(Pekerjaan::class);
+        return $this->belongsTo(Pekerjaan::class);
     }
 }
